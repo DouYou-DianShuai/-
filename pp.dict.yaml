@@ -1,0 +1,34 @@
+---
+name: pp
+version: "2023"
+sort: by_weight
+use_preset_vocabulary: true
+...
+
+、	pp
+。	pp
+，	pp
+；	pp
+“”	pp
+‘’	pp
+（	pp
+）	pp
+（）	pp
+‘	pp
+’	pp
+“	pp
+”	pp
+：	pp
+！	pp
+——	pp
+？	pp
+😊	emoji
+☹️	emoji
+🤔	emoji
+👍	emoji
+😂	emoji
+🤣	emoji
+😉	emoji
+🥺	emoji
+✔️	emoji
+👀️	emoji

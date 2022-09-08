@@ -1,0 +1,246 @@
+schema:
+  schema_id: double_pinyin
+  name: 自然碼雙拼
+  version: "0.15"
+  author:
+    - 佛振 <chen.sst@gmail.com>
+    - srackhall 
+  description: |
+    没在意太多细节(用不到的没删干净)
+    自然碼雙拼方案，用于中文，英文，代码中的中文。
+    * 默认标点为英文标点
+    * pp              输入中文标点以及emoji
+    * emoji           输入emoji
+    * enter           上屏原始输入
+    * shift+enter     上屏拼音
+    * 空格            上屏中文
+    * ctrl+空格       上屏中文(需要修改注册表)
+    * ctrl+n          上选   
+    * ctrl+p          下选
+
+  dependencies:
+    - stroke
+ascii_composer:
+  good_old_caps_lock: true
+  switch_key:
+    Caps_Lock: commit_code
+    Control_L: noop
+    Control_R: noop
+    Shift_L: noop
+    Shift_R: noop
+editor:
+  bindings:
+    "Control+Return": commit_comment
+    "Control+space": confirm
+    Return: commit_script_text
+    "Shift+Return": commit_comment
+    Tab: confirm
+engine:
+  filters:
+    - simplifier
+    - uniquifier
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - "affix_segmentor@english"
+    - "affix_segmentor@pp"
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - reverse_lookup_translator
+    - script_translator
+    - "script_translator@english"
+    - "script_translator@pp"
+english:
+  cjk_minifier: true
+  dictionary: easy_en
+  enable_charset_filter: true
+  prefix: "\\"
+  tag: english
+  tips: "本页有可供选择的制表符"
+key_binder:
+  bindings:
+    - {accept: "Control+p", send: Up, when: composing}
+    - {accept: "Control+n", send: Down, when: composing}
+    - {accept: "Control+h", send: Left, when: composing}
+    - {accept: "Control+l", send: Right, when: composing}
+    - {accept: "Control+b", send: Home, when: composing}
+    - {accept: "Control+e", send: End, when: composing}
+    - {accept: "Control+bracketleft", send: Escape, when: composing}
+    - {accept: minus, send: Page_Up, when: has_menu}
+    - {accept: equal, send: Page_Down, when: has_menu}
+    - {accept: "Control+F16", select: .next, when: always}
+menu:
+  page_size: 9
+pp:
+  cjk_minifier: true
+  dictionary: easy_en
+  enable_charset_filter: true
+  prefix: pp
+  tag: pp
+  tips: "中文标点选择界面"
+punctuator:
+  full_shape:
+    " ": {commit: "　"}
+    "!": {commit: "！"}
+    "\"": {pair: ["“", "”"]}
+    "#": ["＃", "⌘"]
+    "$": ["￥", "$", "€", "£", "¥", "¢", "¤"]
+    "%": ["％", "°", "℃"]
+    "&": "＆"
+    "'": {pair: ["‘", "’"]}
+    "(": "（"
+    ")": "）"
+    "*": ["＊", "·", "・", "×", "※", "❂"]
+    "+": "＋"
+    ",": {commit: "，"}
+    "-": "－"
+    .: {commit: "。"}
+    "/": ["／", "÷"]
+    ":": {commit: "："}
+    ";": {commit: "；"}
+    "<": ["《", "〈", "«", "‹"]
+    "=": "＝"
+    ">": ["》", "〉", "»", "›"]
+    "?": {commit: "？"}
+    "@": ["＠", "☯"]
+    "[": ["「", "【", "〔", "［"]
+    "\\": []
+    "]": ["」", "】", "〕", "］"]
+    "^": {commit: "……"}
+    _: "——"
+    "`": "｀"
+    "{": ["『", "〖", "｛"]
+    "|": ["·", "｜", "§", "¦"]
+    "}": ["』", "〗", "｝"]
+    "~": "～"
+  half_shape:
+    "!": {commit: "!"}
+    "\"": "\""
+    "#": "#"
+    "$": "$"
+    "%": "%"
+    "&": "&"
+    "'": "'"
+    "(": "("
+    ")": ")"
+    "*": "*"
+    "+": "+"
+    ",": {commit: ","}
+    "-": "-"
+    .: {commit: .}
+    "/": "/"
+    ":": {commit: ":"}
+    ";": {commit: ";"}
+    "<": "<"
+    "=": "="
+    ">": ">"
+    "?": {commit: "?"}
+    "@": "@"
+    "[": "["
+    "\\": ["\\", "\t", "☺️", "☹️", "👍", "👀", "🤔", "😂", "🤣", "😉", "🥺", "✔️"]
+    "]": "]"
+    "^": "^"
+    _: _
+    "`": "`"
+    "{": "{"
+    "|": "|"
+    "}": "}"
+    "~": "~"
+  import_preset: default
+recognizer:
+  import_preset: default
+  patterns:
+    email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
+    english: "\\\\{1}"
+    pp: "p{2}"
+    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
+    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
+reverse_lookup:
+  comment_format:
+    - "xlit/ /'/"
+  dictionary: stroke
+  enable_completion: true
+  overwrite_comment: true
+  prefix: "`"
+  suffix: "'"
+  tag: reverse_lookup
+  tips: "〔全拼〕"
+
+    
+speller:
+  algebra:
+    - "erase/^xx$/"
+    - "derive/^([jqxy])u$/$1v/"
+    - "derive/^([aoe])([ioun])$/$1$1$2/"
+    - "xform/^([aoe])(ng)?$/$1$1$2/"
+    - "xform/iu$/Q/"
+    - "xform/[iu]a$/W/"
+    - "xform/[uv]an$/R/"
+    - "xform/[uv]e$/T/"
+    - "xform/ing$|uai$/Y/"
+    - "xform/^sh/U/"
+    - "xform/^ch/I/"
+    - "xform/^zh/V/"
+    - "xform/uo$/O/"
+    - "xform/[uv]n$/P/"
+    - "xform/i?ong$/S/"
+    - "xform/[iu]ang$/D/"
+    - "xform/(.)en$/$1F/"
+    - "xform/(.)eng$/$1G/"
+    - "xform/(.)ang$/$1H/"
+    - "xform/ian$/M/"
+    - "xform/(.)an$/$1J/"
+    - "xform/iao$/C/"
+    - "xform/(.)ao$/$1K/"
+    - "xform/(.)ai$/$1L/"
+    - "xform/(.)ei$/$1Z/"
+    - "xform/ie$/X/"
+    - "xform/ui$/V/"
+    - "xform/(.)ou$/$1B/"
+    - "xform/in$/N/"
+    - "xlit/QWRTYUIOPSDFGHMJCKLZXVBN/qwrtyuiopsdfghmjcklzxvbn/"
+  alphabet: "zyxwvutsrqponmlkjihgfedcba;/,._[]{}()+\"\""
+  auto_select: true
+  auto_select_pattern: a
+  delimiter: " '"
+  initials: zyxwvutsrqponmlkjihgfedcba
+  max_phrase_length: 4
+style:
+  display_tray_icon: false
+  horizontal: false
+  inline_preedit: false
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: ["中文", "英文"]
+  - name: full_shape
+    reset: 0
+    states: ["半角", "全角"]
+  - name: simplification
+    reset: 1
+    states: ["繁体", "简体"]
+  - name: ascii_punct
+    reset: 1
+    states: ["中文标点", "英文标点"]
+translator:
+  comment_format:
+    - "xform/ //"
+  dictionary: all_custom
+  enable_completion: true
+  preedit_format:
+    - "xform/ //"
+  prism: double_pinyin
+  spelling_hints: 10
+  tips: "〔全拼〕"

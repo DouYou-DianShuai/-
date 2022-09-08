@@ -1,0 +1,20 @@
+patch:
+  "menu/page_size": 9
+
+  schema_list:
+    - {schema: double_pinyin} 
+    - {schema: english} 
+
+  "switcher/hotkeys": 
+    # - "F9"
+    # - "F4"
+    # - "Control+F8"
+    # - "Control+grave"
+    # - "Control+F16"
+
+
+#######################################################################################
+# 配合外部程序使用
+  key_binder/bindings:
+  - { when: always, accept: Control+F16, select: .next }
+#######################################################################################
