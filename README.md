@@ -4,7 +4,7 @@
 > >比较粗糙,没有细致整理,主要整合已有方案改了一些简单的配置,没啥深度的自定义配置,仅属于比较基础的用法,因此没必要细致整理(主要基础的这些配置已经满足了自身对输入法的需求哈哈,不得不感叹rime的强大)
 
 采用rime双输入法+ENG美式键盘的方案
-> 打开rime的用户文件夹后,直接在终端中基于此目录使用`git clone https://github.com/srackhall/My-rime-Personal-configuration.git ./`命令,然后重新部署rime,之后根据[rime之外的键绑定](#rime之外的键绑定)配置按键,以及修改win的注册表 [<sup>issues717</sup>](https://github.com/rime/weasel/issues/717)
+> 打开rime的用户文件夹后,直接下载本仓库文件后,直接全部复制粘贴到rime的用户文件下,然后重新部署rime即可完成,之后还需根据[rime之外的键绑定](#rime之外的键绑定)配置切换按键,以及修改win的注册表 [<sup>issues717</sup>](https://github.com/rime/weasel/issues/717)
 * `win(left)+k`     切换至rime->用于实现中英文输入 (需下载powertoys并配置键盘管理器,如下图)
   > 默认禁止中英切换,改用双输入配置的模式切换中英输入('中文为自然码双拼';'英文使用[Rime English方案](https://github.com/sdadonkey/rime-english),可在单词输入时显示其中文翻译')
   > * `win(left)+space`     切换两种输入方案"中","英"(**需下载powertoys并配置键盘管理器,如下图**)
