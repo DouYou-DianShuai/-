@@ -1,7 +1,10 @@
 ## 我的rime方案
-> 比较粗糙,没有细致整理,主要整合已有方案改了一些简单的配置,没啥深度的自定义配置,仅属于比较基础的用法,因此没必要细致整理(主要基础的这些配置已经满足了自身对输入法的需求哈哈,不得不感叹rime的强大)
+
+> 平台: win
+> >比较粗糙,没有细致整理,主要整合已有方案改了一些简单的配置,没啥深度的自定义配置,仅属于比较基础的用法,因此没必要细致整理(主要基础的这些配置已经满足了自身对输入法的需求哈哈,不得不感叹rime的强大)
 
 采用rime双输入法+ENG美式键盘的方案
+> 打开rime的用户文件夹后,直接在终端中基于此目录使用`git clone https://github.com/srackhall/My-rime-Personal-configuration.git ./`命令,然后重新部署rime,之后根据[rime之外的键绑定](#rime之外的键绑定)配置按键,以及修改win的注册表 [<sup>issues717</sup>](https://github.com/rime/weasel/issues/717)
 * `win(left)+k`     切换至rime->用于实现中英文输入 (需下载powertoys并配置键盘管理器,如下图)
   > 默认禁止中英切换,改用双输入配置的模式切换中英输入('中文为自然码双拼';'英文使用[Rime English方案](https://github.com/sdadonkey/rime-english),可在单词输入时显示其中文翻译')
   > * `win(left)+space`     切换两种输入方案"中","英"(**需下载powertoys并配置键盘管理器,如下图**)
@@ -61,3 +64,6 @@
   rime或者是lua的限制(猜测应该是lua),单页显示的上下文最多如下图(注意一个汉字相当于2个半字母,可自行等效换算)。 单页(即一次,不论你设置的单页3个还是9个或10个, 这个上下文的最大值不变)因此若是上下文过多, 你单页显示数越少越好, 最好是<5, 以免引起其他程序被关闭
 
 ![rime](https://user-images.githubusercontent.com/65339064/187413362-8c3d57e1-b7fd-407a-bb7f-4dbfc7575ce0.png)
+
+
+[issues717](https://github.com/rime/weasel/issues/717)
